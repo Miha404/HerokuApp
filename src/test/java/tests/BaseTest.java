@@ -6,7 +6,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import pages.CheckBoxPage;
 import pages.ContextMenuPage;
+import pages.DynamicControlPage;
 import pages.MainPage;
 
 import javax.swing.*;
@@ -17,6 +19,8 @@ public class BaseTest {
     MainPage mainPage;
     ContextMenuPage contextMenuPage;
     Actions actions;
+    CheckBoxPage checkBoxPage;
+    DynamicControlPage dynamicControlPage;
 
 
 
@@ -32,6 +36,7 @@ public class BaseTest {
         driver.manage().timeouts().implicitlyWait(20L, TimeUnit.SECONDS);
         mainPage = new MainPage(driver);
         contextMenuPage = new ContextMenuPage(driver);
+        dynamicControlPage = new DynamicControlPage(driver);
 
     }
 
