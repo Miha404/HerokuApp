@@ -1,15 +1,21 @@
 package tests;
 
+import net.bytebuddy.pool.TypePool;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.CheckBoxPage;
-import pages.ContextMenuPage;
-import pages.DynamicControlPage;
-import pages.MainPage;
+import org.testng.reporters.jq.BasePanel;
+import pages.*;
+import steps.ContextMenuSteps;
+import steps.DynamicControlPageSteps;
+import steps.FileUploadPageSteps;
+import steps.MainPageSteps;
 
 import javax.swing.*;
 import java.util.concurrent.TimeUnit;
@@ -21,10 +27,19 @@ public class BaseTest {
     Actions actions;
     CheckBoxPage checkBoxPage;
     DynamicControlPage dynamicControlPage;
-
+    WebDriverWait wait;
+    FileUploadPage fileUploadPage;
+    DynamicControlPageSteps dynamicControlPageSteps;
+    MainPageSteps mainPageSteps;
+    FileUploadPageSteps fileUploadPageSteps;
+    ContextMenuSteps contextMenuSteps;
 
 
     public BaseTest() {
+    }
+
+    protected void validateIsPageOpened(BasePage page){
+    Assert.assertTrue(page.isPageLoaded(), "Page is not opened");
     }
 
     @BeforeMethod
@@ -33,11 +48,16 @@ public class BaseTest {
         driver = new ChromeDriver();
         actions = new Actions(driver);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20L, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
         mainPage = new MainPage(driver);
         contextMenuPage = new ContextMenuPage(driver);
         dynamicControlPage = new DynamicControlPage(driver);
-
+        wait = new WebDriverWait(driver, 10);
+        fileUploadPage = new FileUploadPage(driver);
+        dynamicControlPageSteps = new DynamicControlPageSteps(dynamicControlPage);
+        mainPageSteps = new MainPageSteps(mainPage);
+        fileUploadPageSteps = new FileUploadPageSteps(fileUploadPage);
+        contextMenuSteps = new ContextMenuSteps(contextMenuPage);
     }
 
     @AfterMethod

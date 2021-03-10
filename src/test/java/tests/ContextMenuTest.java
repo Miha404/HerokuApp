@@ -12,9 +12,9 @@ public class ContextMenuTest extends BaseTest{
     @Test
     public void contextMenuDoubleClick(){
         mainPage.openPage();
-        driver.findElement(By.xpath("//*[contains(text(),'Context Menu')]")).click();
-        WebElement webElement =  driver.findElement(By.id("hot-spot"));
-        actions.contextClick(webElement).perform();
+        mainPageSteps.openContextMenuPageStep();
+        validateIsPageOpened(contextMenuPage);
+        contextMenuSteps.doubleClickStep();
     }
 
 }
