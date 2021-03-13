@@ -1,19 +1,24 @@
 package steps;
 
-import pages.ContextMenuPage;
-import pages.DynamicControlPage;
-import pages.FileUploadPage;
-import pages.MainPage;
+import pages.*;
 
-public class MainPageSteps {
+public class MainPageSteps extends BaseSteps{
     public MainPageSteps(MainPage mainPage) {
         this.mainPage = mainPage;
     }
 
     MainPage mainPage;
 
+    public MainPage openMainPageStep(){
+        mainPage.openPage();
+        validateIsPageOpened(mainPage);
+        return mainPage;
+    }
+
     public DynamicControlPage openDynamicControlStep() {
-        return mainPage.openDynamicControls();
+        DynamicControlPage dynamicControlPage = mainPage.openDynamicControls();
+        validateIsPageOpened(dynamicControlPage);
+        return dynamicControlPage;
     }
 
     public FileUploadPage openFileUploadPageStep() {
@@ -22,6 +27,10 @@ public class MainPageSteps {
 
     public ContextMenuPage openContextMenuPageStep() {
         return mainPage.openContextMenu();
+    }
+
+    public CheckBoxPage openCheckboxPageStep(){
+        return mainPage.openCheckBox();
     }
 
     //TODO improve with abstract Base class

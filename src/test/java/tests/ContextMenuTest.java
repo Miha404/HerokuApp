@@ -13,7 +13,7 @@ public class ContextMenuTest extends BaseTest{
     public void contextMenuDoubleClick(){
         mainPage.openPage();
         mainPageSteps.openContextMenuPageStep();
-        validateIsPageOpened(contextMenuPage);
+
         contextMenuSteps.doubleClickStep();
     }
 

@@ -12,10 +12,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.reporters.jq.BasePanel;
 import pages.*;
-import steps.ContextMenuSteps;
-import steps.DynamicControlPageSteps;
-import steps.FileUploadPageSteps;
-import steps.MainPageSteps;
+import steps.*;
 
 import javax.swing.*;
 import java.util.concurrent.TimeUnit;
@@ -33,14 +30,13 @@ public class BaseTest {
     MainPageSteps mainPageSteps;
     FileUploadPageSteps fileUploadPageSteps;
     ContextMenuSteps contextMenuSteps;
+    CheckBoxSteps checkBoxSteps;
 
 
     public BaseTest() {
     }
 
-    protected void validateIsPageOpened(BasePage page){
-    Assert.assertTrue(page.isPageLoaded(), "Page is not opened");
-    }
+
 
     @BeforeMethod
     public void setUp() {
@@ -58,6 +54,7 @@ public class BaseTest {
         mainPageSteps = new MainPageSteps(mainPage);
         fileUploadPageSteps = new FileUploadPageSteps(fileUploadPage);
         contextMenuSteps = new ContextMenuSteps(contextMenuPage);
+        checkBoxSteps = new CheckBoxSteps(checkBoxPage);
     }
 
     @AfterMethod
